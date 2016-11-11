@@ -3,12 +3,12 @@
 //
 // A simple chat server using Socket.IO, Express, and Async.
 //
-var http = require('http');
 var path = require('path');
 
-var async = require('async');
-var socketio = require('socket.io');
 var express = require('express');
+var bodyParser = require('body-parser');
+
+var db = require("./db");
 
 //
 // ## SimpleServer `SimpleServer(obj)`
@@ -16,69 +16,86 @@ var express = require('express');
 // Creates a new instance of SimpleServer with the following options:
 //  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
 //
-var router = express();
-var server = http.createServer(router);
-var io = socketio.listen(server);
+var app = express();
 
-router.use(express.static(path.resolve(__dirname, 'client')));
-var messages = [];
-var sockets = [];
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-io.on('connection', function (socket) {
-    messages.forEach(function (data) {
-      socket.emit('message', data);
-    });
+app.use(express.static(path.resolve(__dirname, 'client')));
 
-    sockets.push(socket);
+app.get('/member', function (req, res) {
+  db.read("member", {}, function(result){
+    res.status(200);
+    res.send(JSON.stringify(result));
+  });
+});
 
-    socket.on('disconnect', function () {
-      sockets.splice(sockets.indexOf(socket), 1);
-      updateRoster();
-    });
+app.post('/member', function (req, res) {
+  db.create("member", req.body.where, function(result){
+    res.status(201);
+    res.send();
+  });
+});
 
-    socket.on('message', function (msg) {
-      var text = String(msg || '');
+app.put('/member', function (req, res) {
+  db.update("member", req.body.where, req.body.replace, function(result){
+    res.status(204);
+    res.send();
+  });
+});
 
-      if (!text)
-        return;
-
-      socket.get('name', function (err, name) {
-        var data = {
-          name: name,
-          text: text
-        };
-
-        broadcast('message', data);
-        messages.push(data);
-      });
-    });
-
-    socket.on('identify', function (name) {
-      socket.set('name', String(name || 'Anonymous'), function (err) {
-        updateRoster();
-      });
+app.delete('/member', function (req, res) {
+  db.delete("member", req.body.where, function(result){
+      res.status(204);
+      res.send();
+  });
+});
+app.post("/signin", function (req, res){
+  db.read("member", {"member":req.body.id}, function(result){
+    var member = result[0]._id;
+    db.create("signin", {"member": member, "time": req.body.time}, function(){
+      res.status(201);
+      res.send();
     });
   });
-
-function updateRoster() {
-  async.map(
-    sockets,
-    function (socket, callback) {
-      socket.get('name', callback);
-    },
-    function (err, names) {
-      broadcast('roster', names);
+});
+app.get("/signin", function(req, res){
+  db.read("signin", {}, function(result){
+    if(result.length === 0){
+      res.send("[]");
+      return;
     }
-  );
-}
+    var signins = result;
+    //creates array of all member object IDs
+    var members = signins.map(function(doc){
+      return doc.member;
+    });
+    
+    //Find all members with IDs that have a signin, and loop through them.
+    //Replace each ID with a member object
+    db.read("member", {_id: {$in: members}}, function(result){
+      var responceArray = [];
+      for(var i=0;i<result.length;i++){
+        for(var j=signins.length-1;j>=0;j--){
+          if(signins[j].member.equals(result[i]._id)){
+            signins[j].member = {fname:result[i].fname};
+            //Take out the signin (Since we know who it is) and put it int the responce
+            responceArray.push(signins.splice(j,1));
+          }
+        }
+      }
+      
+      res.send(JSON.stringify(responceArray));
+    });
+    
 
-function broadcast(event, data) {
-  sockets.forEach(function (socket) {
-    socket.emit(event, data);
+    
   });
-}
+});
 
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
-  var addr = server.address();
-  console.log("Chat server listening at", addr.address + ":" + addr.port);
+db.connectDB(function(){
+    process.stdout.write("Starting server... ");
+    app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+        console.log("Done.");
+    });
 });
