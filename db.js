@@ -13,10 +13,17 @@ function connectDB(callback){
     });
 }
 
+function newCollection(name, callback){
+    db.createCollection(name, function(err, collection){
+        assert.equal(err, null, "The database encountered an error while making a new collection");
+        callback();
+    })
+}
+
 function create(collection, doc, callback){
-    db.collection(collection).insertOne(doc, function(err, result){
+    db.collection(collection).insertMany(doc, function(err, result){
         assert.equal(err, null, "The database encountered an error while creating.");
-        callback(err, result);
+        if(callback != undefined) callback(result);
     });
 }
 
@@ -42,6 +49,7 @@ function remove(collection, where, callback){
         callback(result);
     });
 }
+exports.newCollection = newCollection;
 exports.connectDB = connectDB;
 exports.create = create;
 exports.read   = read;
