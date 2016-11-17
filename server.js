@@ -93,6 +93,20 @@ app.get("/signin", function(req, res){
   });
 });
 
+app.post("/signin", function(req, res){
+  db.read("member", req.body.member, function(result){
+    if(result.length != 0){
+      db.create("signin", {time:req.body.time, member:result[0]._id}, function(result){
+        res.status(201);
+        res.send();
+      });
+    } else {
+      res.status(400);
+      res.send();
+    }
+  });
+});
+
 db.connectDB(function(){
     process.stdout.write("Starting server... ");
     app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
