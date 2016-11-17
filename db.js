@@ -12,12 +12,15 @@ function connectDB(callback){
         callback();
     });
 }
+function disconnect(callback){
+    db.close(callback);
+}
 
 function newCollection(name, callback){
     db.createCollection(name, function(err, collection){
         assert.equal(err, null, "The database encountered an error while making a new collection");
         callback();
-    })
+    });
 }
 
 function create(collection, doc, callback){
@@ -49,6 +52,7 @@ function remove(collection, where, callback){
         callback(result);
     });
 }
+exports.disconnect = disconnect;
 exports.newCollection = newCollection;
 exports.connectDB = connectDB;
 exports.create = create;

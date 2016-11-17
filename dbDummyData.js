@@ -14,7 +14,7 @@ db.connectDB(function(){
                     signins[i] = {member:result.ops[i]._id, time: Math.floor(Date.now() / 1000)};
                 }
                 db.create("signin", signins, function(){
-                    console.log("Done adding data. Press ctrl+c to exit.");
+                    db.disconnect(console.log("Done adding data."));
                 });
             });
         });  
