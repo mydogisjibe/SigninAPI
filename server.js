@@ -45,7 +45,7 @@ app.put('/member', function (req, res) {
 });
 
 app.delete('/member', function (req, res) {
-  db.delete("member", req.body.where, function(result){
+  db.delete("member", req.body.where, req.body.replace, function(result){
       res.status(204);
       res.send();
   });
