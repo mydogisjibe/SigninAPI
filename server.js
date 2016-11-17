@@ -80,7 +80,7 @@ app.get("/signin", function(req, res){
           if(signins[j].member.equals(result[i]._id)){
             signins[j].member = {fname:result[i].fname};
             //Take out the signin (Since we know who it is) and put it int the responce
-            responceArray.push(signins.splice(j,1));
+            responceArray.push(signins.splice(j,1)[0]);
           }
         }
       }
