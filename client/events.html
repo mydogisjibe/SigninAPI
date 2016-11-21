@@ -1,0 +1,57 @@
+<DOCTYPE html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Events</title>
+  <script src="js/jquery.min.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="nav">
+    <ul>
+      <li class="left"><a href="index.html">Home</a></li>
+      <li class="left"><a href="admin.html">Students</a></li>
+      <li class="left active"><a href="#">Events</a></li>
+      <li class="left"><a href="signins.html">Signins</a></li>
+      <li class="right"><a href="index.html">Sign Out (AdminName)</a></a>
+    </ul>
+  </div>
+  <div class="title">
+     <h1>Event List</h1>
+  </div>
+  <hr>
+  <br>
+  <div class="main">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hack Club (CURRENT)</td>
+          <td>
+            <button class = "btn btn-danger" id="del1"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+        <tr>
+          <td>SL Hacks</td>
+          <td>
+            <button class = "btn btn-danger" id="del1"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><input type="text" class="form-control" placeholder="Event" id="newEvent"></td>
+          <td><button class = "btn btn-success btn-block">   <span class="glyphicon glyphicon-plus"></span>   </button></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</body>

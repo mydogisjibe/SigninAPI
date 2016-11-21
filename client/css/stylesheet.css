@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+body{
+  text-align:center;
+  background-color: #558C89;
+}
+h1, h3{
+  font-family:"Lato";
+  font-weight:bold;
+}
+.main{
+  background-color:#74AFAD;
+  padding:30px;
+  border-radius:20px;
+}
+.title{
+  background-color: #ECECEA;
+  padding:20px;
+  top:0;
+}
+.input-group{
+  width:100%;
+  text-align:center;
+}
+#events .dropdown-menu{
+  width:100%;
+}
+tfoot tr{
+  background-color:#D9853B;
+}
+.nav{
+  background-color: #74AFAD;
+  width:100%;
+  padding: 0px 0px 0px 15px;
+  border-bottom: 8px solid #D9853B;
+}
+.nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width:100%;
+}
+.nav ul li{
+  display: inline;
+}
+.left{
+  float: left;
+}
+li a{
+  color:white;
+  text-decoration:none;
+  display: inline-block;
+  padding: 15px 25px;
+}
+a:visited {
+    text-decoration: none;
+    color:white;
+    text-align: center;
+}
+a:link{
+  text-decoration:none;
+}
+a:hover {
+    text-decoration: none;
+    color:white;
+}
+
+a:active {
+    text-decoration: none;
+    color:white;
+}
+.right{
+  float:right;
+  background-color:#D9853B;
+}
+.active{
+  background-color:#558C89;
+}
+.hideMe{
+  visibility:hidden;
+}

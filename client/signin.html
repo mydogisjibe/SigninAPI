@@ -1,0 +1,39 @@
+<DOCTYPE html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Sign In</title>
+  <script src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+  <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <a class="btn btn-primary btn-block btn-lg" href ="index.html"><span class="glyphicon glyphicon-home"></span></a>
+  <div class="title">
+     <h1>Sign In</h1>
+  </div>
+  <hr>
+  <br>
+  <div class="main">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Student ID" id="id">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" id="inputId" type="button" onClick="makeVisible()">Search <span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
+
+
+    <div class="hideMe">
+      <br><br>
+      <h3>Hi (Name)!</h3>
+      <hr>
+      <a href = "index.html" class = "btn btn-primary btn-lg">Sign In</a>
+      <a href = "index.html" class = "btn btn-info btn-lg">Sign Out</a>
+      <button class = "btn btn-warning btn-lg" onClick="makeInvisible()">Cancel</button>
+    </div>
+  </div>
+</body>

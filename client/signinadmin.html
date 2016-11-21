@@ -1,0 +1,40 @@
+<DOCTYPE html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Admin Sign In</title>
+  <script src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <a class="btn btn-primary btn-block btn-lg" href ="index.html"><span class="glyphicon glyphicon-home"></span></a>
+  <div class="title">
+     <h1>Admin Sign In</h1>
+  </div>
+  <hr>
+  <br>
+  <div class="main">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Name" id="name">
+      <input type="text" class="form-control" placeholder="Password" id="pass">
+      <button class="btn btn-primary btn-block" onClick="makeVisible()">Submit</button>
+      <br>
+      <div class="hideMe" >
+        <hr>
+        <div class="dropdown" id="events">
+          <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">Events <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="admin.html">Hack Club</a></li>
+            <li><a href="admin.html">SL Hacks</a></li>
+            <li class="divider"></li>
+            <li><a href="#">New Event</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
