@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 
 var db = require("./db");
 
+var socket = require('socket.io');
+
 //
 // ## SimpleServer `SimpleServer(obj)`
 //
