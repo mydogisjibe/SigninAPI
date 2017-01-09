@@ -18,7 +18,7 @@ h1, h3{
   top:0;
 }
 .input-group{
-  width:100%;
+  width:100%; 
   text-align:center;
 }
 #events .dropdown-menu{
@@ -76,5 +76,21 @@ a:active {
   background-color:#558C89;
 }
 .hideMe{
-  visibility:hidden;
+  display:none;
+}
+.alert{
+  display:none;
+  text-align:left;
+}
+.margin{
+  margin-right:5px;
+  margin-left:5px;
+}
+select,option{
+  padding:5px;
+  border-radius:5px;
+  font-size: 18px;
+  background-color: #ECECEA;
+  font-family:"Lato";
+  width:100%;
 }

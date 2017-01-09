@@ -3,6 +3,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Sign In</title>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -15,25 +16,30 @@
     <a class="btn btn-primary btn-block btn-lg" href ="index.html"><span class="glyphicon glyphicon-home"></span></a>
   <div class="title">
      <h1>Sign In</h1>
-  </div>
+  </div> 
   <hr>
   <br>
   <div class="main">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Student ID" id="id">
       <span class="input-group-btn">
-        <button class="btn btn-primary" id="inputId" type="button" onClick="makeVisible()">Search <span class="glyphicon glyphicon-search"></span></button>
+        <button class="btn btn-primary" id="inputId" type="button" onClick="submitId();">Search <span class="glyphicon glyphicon-search"></span></button>
       </span>
+    </div>
+    <br>
+    <div class="alert alert-danger">
+      <strong>Sign-in failed</strong>
     </div>
 
 
     <div class="hideMe">
       <br><br>
-      <h3>Hi (Name)!</h3>
+      <h3 id="stu_name">Hi (Name)!</h3>
       <hr>
-      <a href = "index.html" class = "btn btn-primary btn-lg">Sign In</a>
-      <a href = "index.html" class = "btn btn-info btn-lg">Sign Out</a>
-      <button class = "btn btn-warning btn-lg" onClick="makeInvisible()">Cancel</button>
+      <a href = "index.html" id="studentSignIn" class = "btn btn-primary btn-lg">Sign In</a>
+      <!--<a href = "index.html" class = "btn btn-info btn-lg">Sign Out</a>-->
+      <button class = "btn btn-warning btn-lg" onClick="hideText()">Cancel</button>
     </div>
   </div>
+  
 </body>

@@ -7,61 +7,103 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
   <script src="js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
 </head>
-<body>
+<body onload="getStudents();">
   <div class="nav">
     <ul>
       <li class="left"><a href="index.html">Home</a></li>
       <li class="left active"><a href="#">Students</a></li>
-      <li class="left"><a href="events.html">Events</a></li>
-      <li class="left"><a href="signins.html">Signins</a></li>
+      <!--<li class="left"><a href="events.html">Events</a></li>-->
+      <li class="left"><a href="signins.html">Sign-ins</a></li>
       <li class="right"><a href="index.html">Sign Out (AdminName)</a></a>
     </ul>
   </div>
   <div class="title">
-     <h1>Student List</h1>
+     <h1>Student List</h1> 
   </div>
   <hr>
   <br>
   <div class="main">
+    <select id = "select" onchange = "select();">
+      <option value="fname" id = "sortName"><h4>Sort by Name</h4></option>
+      <hr>
+      <option value="id" id = "sortId"><h4>Sort by ID</h4></option>
+    </select>
+    <br>
+    <br>
     <table class="table table-bordered">
       <thead>
         <tr>
           <th>First Name</th>
-          <th>Last Name</th>
           <th>ID Number</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Hello</td>
-          <td>World</td>
-          <td>31415</td>
-          <td>
-            <button class = "btn btn-danger" id="del1"><span class="glyphicon glyphicon-trash"></span></button>
-            <button class = "btn btn-primary" id=""><span class="glyphicon glyphicon-pencil"></span></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Test</td>
-          <td>Test</td>
-          <td>27181</td>
-          <td>
-            <button class = "btn btn-danger" id="del1"><span class="glyphicon glyphicon-trash"></span></button>
-            <button class = "btn btn-primary" id=""><span class="glyphicon glyphicon-pencil"></span></button>
-          </td>
-        </tr>
+       
       </tbody>
       <tfoot>
         <tr>
           <td><input type="text" class="form-control" placeholder="First" id="newFirst"></td>
-          <td><input type="text" class="form-control" placeholder="Last" id="newLast"></td>
           <td><input type="text" class="form-control" placeholder="ID" id="newID"></td>
-          <td><button class = "btn btn-success btn-block">   <span class="glyphicon glyphicon-plus"></span>   </button></td>
+          <td><button class = "btn btn-success btn-block" onClick="createStudent();">   <span class="glyphicon glyphicon-plus"></span>  </td>
         </tr>
       </tfoot>
+       </button> <div class="alert alert-danger">
+      <strong>Could not create student.</strong>
+    </div>
     </table>
+    
   </div>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modify</h4>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="New Student Name" id="changeName">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" id="chName">Change</button>
+            </span>
+          </div>
+          <br>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="New Student ID" id="changeId">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" id="chId">Change</button>
+            </span>
+          </div>
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Other modal-->
+  <div id="modal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id = "modaltitle2">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+              <button class="btn btn-danger"data-dismiss="modal" type="button" id="delete">Yes</button>
+              <button class="btn btn-primary"data-dismiss="modal" type="button" id="dont-delete">No</button>
+        </div>
+
+      </div>
+      </div>
+    </div>
 </body>
